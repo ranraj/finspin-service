@@ -1,0 +1,45 @@
+{
+  "applications": ["finspin"],
+  "changelogDate": "20231007082042",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "board",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "uid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Board",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "tile",
+      "otherEntityRelationshipName": "board",
+      "relationshipName": "board",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "dashboard",
+      "otherEntityRelationshipName": "board",
+      "relationshipName": "dashBoard",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

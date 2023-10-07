@@ -1,0 +1,150 @@
+<div>
+  <h2 id="page-heading" data-cy="TileHeading">
+    <span jhiTranslate="finspinApp.tile.home.title">Tiles</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="finspinApp.tile.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-tile"
+        [routerLink]="['/tile/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="finspinApp.tile.home.createLabel"> Create a new Tile </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="finspinApp.tile.home.search">Query</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'finspinApp.tile.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+          <fa-icon icon="trash-alt"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="tiles?.length === 0">
+    <span jhiTranslate="finspinApp.tile.home.notFound">No tiles found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="tiles && tiles.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id">
+            <span jhiTranslate="global.field.id">ID</span> <fa-icon *ngIf="!currentSearch" icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="positionX">
+            <span jhiTranslate="finspinApp.tile.positionX">Position X</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="positionY">
+            <span jhiTranslate="finspinApp.tile.positionY">Position Y</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="color">
+            <span jhiTranslate="finspinApp.tile.color">Color</span> <fa-icon *ngIf="!currentSearch" icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="positionMode">
+            <span jhiTranslate="finspinApp.tile.positionMode">Position Mode</span> <fa-icon *ngIf="!currentSearch" icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="height"><span jhiTranslate="finspinApp.tile.height">Height</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="width"><span jhiTranslate="finspinApp.tile.width">Width</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="displaySize">
+            <span jhiTranslate="finspinApp.tile.displaySize">Display Size</span> <fa-icon *ngIf="!currentSearch" icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="displayMode">
+            <span jhiTranslate="finspinApp.tile.displayMode">Display Mode</span> <fa-icon *ngIf="!currentSearch" icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="task.id"><span jhiTranslate="finspinApp.tile.task">Task</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="board.id"><span jhiTranslate="finspinApp.tile.board">Board</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tile of tiles; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/tile', tile.id, 'view']">{{ tile.id }}</a>
+          </td>
+          <td>{{ tile.positionX }}</td>
+          <td>{{ tile.positionY }}</td>
+          <td>{{ tile.color }}</td>
+          <td jhiTranslate="{{ 'finspinApp.PositionMode.' + tile.positionMode }}">{{ tile.positionMode }}</td>
+          <td>{{ tile.height }}</td>
+          <td>{{ tile.width }}</td>
+          <td jhiTranslate="{{ 'finspinApp.DisplaySize.' + tile.displaySize }}">{{ tile.displaySize }}</td>
+          <td jhiTranslate="{{ 'finspinApp.DisplayMode.' + tile.displayMode }}">{{ tile.displayMode }}</td>
+          <td>
+            <div *ngIf="tile.task">
+              <a [routerLink]="['/task', tile.task?.id, 'view']">{{ tile.task?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="tile.board">
+              <a [routerLink]="['/board', tile.board?.id, 'view']">{{ tile.board?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/tile', tile.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/tile', tile.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(tile)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="tiles && tiles.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

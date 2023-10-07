@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="orgAccount">
+      <h2 data-cy="orgAccountDetailsHeading"><span jhiTranslate="finspinApp.orgAccount.detail.title">Org Account</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ orgAccount.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.orgAccount.name">Name</span></dt>
+        <dd>
+          <span>{{ orgAccount.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.orgAccount.blocked">Blocked</span></dt>
+        <dd>
+          <span>{{ orgAccount.blocked }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.orgAccount.owner">Owner</span></dt>
+        <dd>
+          <span>{{ orgAccount.owner?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.orgAccount.org">Org</span></dt>
+        <dd>
+          <div *ngIf="orgAccount.org">
+            <a [routerLink]="['/organisation', orgAccount.org?.id, 'view']">{{ orgAccount.org?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/org-account', orgAccount.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

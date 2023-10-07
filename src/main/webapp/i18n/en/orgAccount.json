@@ -1,0 +1,29 @@
+{
+  "finspinApp": {
+    "orgAccount": {
+      "home": {
+        "title": "Org Accounts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Org Account",
+        "createOrEditLabel": "Create or edit a Org Account",
+        "search": "Search for Org Account",
+        "notFound": "No Org Accounts found"
+      },
+      "created": "A new Org Account is created with identifier {{ param }}",
+      "updated": "A Org Account is updated with identifier {{ param }}",
+      "deleted": "A Org Account is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Org Account {{ id }}?"
+      },
+      "detail": {
+        "title": "Org Account"
+      },
+      "id": "ID",
+      "name": "Name",
+      "blocked": "Blocked",
+      "owner": "Owner",
+      "org": "Org",
+      "project": "Project"
+    }
+  }
+}

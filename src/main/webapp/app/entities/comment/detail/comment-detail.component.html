@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="comment">
+      <h2 data-cy="commentDetailsHeading"><span jhiTranslate="finspinApp.comment.detail.title">Comment</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ comment.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.comment.createdDate">Created Date</span></dt>
+        <dd>
+          <span>{{ comment.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.comment.updatedDate">Updated Date</span></dt>
+        <dd>
+          <span>{{ comment.updatedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.comment.content">Content</span></dt>
+        <dd>
+          <span>{{ comment.content }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.comment.disabled">Disabled</span></dt>
+        <dd>
+          <span>{{ comment.disabled }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.comment.upVote">Up Vote</span></dt>
+        <dd>
+          <span>{{ comment.upVote }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.comment.downVote">Down Vote</span></dt>
+        <dd>
+          <span>{{ comment.downVote }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.comment.permLink">Perm Link</span></dt>
+        <dd>
+          <span>{{ comment.permLink }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.comment.owner">Owner</span></dt>
+        <dd>
+          <span>{{ comment.owner?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.comment.task">Task</span></dt>
+        <dd>
+          <div *ngIf="comment.task">
+            <a [routerLink]="['/task', comment.task?.id, 'view']">{{ comment.task?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/comment', comment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

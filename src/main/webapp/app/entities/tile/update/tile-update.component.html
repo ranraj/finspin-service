@@ -1,0 +1,115 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-tile-heading" data-cy="TileCreateUpdateHeading" jhiTranslate="finspinApp.tile.home.createOrEditLabel">
+        Create or edit a Tile
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="finspinApp.tile.positionX" for="field_positionX">Position X</label>
+          <input type="number" class="form-control" name="positionX" id="field_positionX" data-cy="positionX" formControlName="positionX" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="finspinApp.tile.positionY" for="field_positionY">Position Y</label>
+          <input type="number" class="form-control" name="positionY" id="field_positionY" data-cy="positionY" formControlName="positionY" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="finspinApp.tile.color" for="field_color">Color</label>
+          <input type="text" class="form-control" name="color" id="field_color" data-cy="color" formControlName="color" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="finspinApp.tile.positionMode" for="field_positionMode">Position Mode</label>
+          <select class="form-control" name="positionMode" formControlName="positionMode" id="field_positionMode" data-cy="positionMode">
+            <option [ngValue]="null">{{ 'finspinApp.PositionMode.null' | translate }}</option>
+            <option *ngFor="let positionMode of positionModeValues" [value]="positionMode">
+              {{ 'finspinApp.PositionMode.' + positionMode | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="finspinApp.tile.height" for="field_height">Height</label>
+          <input type="number" class="form-control" name="height" id="field_height" data-cy="height" formControlName="height" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="finspinApp.tile.width" for="field_width">Width</label>
+          <input type="number" class="form-control" name="width" id="field_width" data-cy="width" formControlName="width" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="finspinApp.tile.displaySize" for="field_displaySize">Display Size</label>
+          <select class="form-control" name="displaySize" formControlName="displaySize" id="field_displaySize" data-cy="displaySize">
+            <option [ngValue]="null">{{ 'finspinApp.DisplaySize.null' | translate }}</option>
+            <option *ngFor="let displaySize of displaySizeValues" [value]="displaySize">
+              {{ 'finspinApp.DisplaySize.' + displaySize | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="finspinApp.tile.displayMode" for="field_displayMode">Display Mode</label>
+          <select class="form-control" name="displayMode" formControlName="displayMode" id="field_displayMode" data-cy="displayMode">
+            <option [ngValue]="null">{{ 'finspinApp.DisplayMode.null' | translate }}</option>
+            <option *ngFor="let displayMode of displayModeValues" [value]="displayMode">
+              {{ 'finspinApp.DisplayMode.' + displayMode | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="finspinApp.tile.task" for="field_task">Task</label>
+          <select class="form-control" id="field_task" data-cy="task" name="task" formControlName="task">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="taskOption.id === editForm.get('task')!.value?.id ? editForm.get('task')!.value : taskOption"
+              *ngFor="let taskOption of tasksCollection; trackBy: trackTaskById"
+            >
+              {{ taskOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="finspinApp.tile.board" for="field_board">Board</label>
+          <select class="form-control" id="field_board" data-cy="board" name="board" formControlName="board">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="boardOption.id === editForm.get('board')!.value?.id ? editForm.get('board')!.value : boardOption"
+              *ngFor="let boardOption of boardsSharedCollection; trackBy: trackBoardById"
+            >
+              {{ boardOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

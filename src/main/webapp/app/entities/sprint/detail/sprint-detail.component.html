@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sprint">
+      <h2 data-cy="sprintDetailsHeading"><span jhiTranslate="finspinApp.sprint.detail.title">Sprint</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ sprint.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.sprint.name">Name</span></dt>
+        <dd>
+          <span>{{ sprint.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.sprint.code">Code</span></dt>
+        <dd>
+          <span>{{ sprint.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.sprint.createdDate">Created Date</span></dt>
+        <dd>
+          <span>{{ sprint.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.sprint.updateDate">Update Date</span></dt>
+        <dd>
+          <span>{{ sprint.updateDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.sprint.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ sprint.startDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.sprint.endDate">End Date</span></dt>
+        <dd>
+          <span>{{ sprint.endDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.sprint.project">Project</span></dt>
+        <dd>
+          <div *ngIf="sprint.project">
+            <a [routerLink]="['/project', sprint.project?.id, 'view']">{{ sprint.project?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sprint', sprint.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

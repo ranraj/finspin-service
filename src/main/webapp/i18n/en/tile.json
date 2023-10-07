@@ -1,0 +1,34 @@
+{
+  "finspinApp": {
+    "tile": {
+      "home": {
+        "title": "Tiles",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tile",
+        "createOrEditLabel": "Create or edit a Tile",
+        "search": "Search for Tile",
+        "notFound": "No Tiles found"
+      },
+      "created": "A new Tile is created with identifier {{ param }}",
+      "updated": "A Tile is updated with identifier {{ param }}",
+      "deleted": "A Tile is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tile {{ id }}?"
+      },
+      "detail": {
+        "title": "Tile"
+      },
+      "id": "ID",
+      "positionX": "Position X",
+      "positionY": "Position Y",
+      "color": "Color",
+      "positionMode": "Position Mode",
+      "height": "Height",
+      "width": "Width",
+      "displaySize": "Display Size",
+      "displayMode": "Display Mode",
+      "task": "Task",
+      "board": "Board"
+    }
+  }
+}

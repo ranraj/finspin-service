@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="tile">
+      <h2 data-cy="tileDetailsHeading"><span jhiTranslate="finspinApp.tile.detail.title">Tile</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ tile.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.tile.positionX">Position X</span></dt>
+        <dd>
+          <span>{{ tile.positionX }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.tile.positionY">Position Y</span></dt>
+        <dd>
+          <span>{{ tile.positionY }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.tile.color">Color</span></dt>
+        <dd>
+          <span>{{ tile.color }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.tile.positionMode">Position Mode</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'finspinApp.PositionMode.' + tile.positionMode }}">{{ tile.positionMode }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.tile.height">Height</span></dt>
+        <dd>
+          <span>{{ tile.height }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.tile.width">Width</span></dt>
+        <dd>
+          <span>{{ tile.width }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.tile.displaySize">Display Size</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'finspinApp.DisplaySize.' + tile.displaySize }}">{{ tile.displaySize }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.tile.displayMode">Display Mode</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'finspinApp.DisplayMode.' + tile.displayMode }}">{{ tile.displayMode }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.tile.task">Task</span></dt>
+        <dd>
+          <div *ngIf="tile.task">
+            <a [routerLink]="['/task', tile.task?.id, 'view']">{{ tile.task?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.tile.board">Board</span></dt>
+        <dd>
+          <div *ngIf="tile.board">
+            <a [routerLink]="['/board', tile.board?.id, 'view']">{{ tile.board?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/tile', tile.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

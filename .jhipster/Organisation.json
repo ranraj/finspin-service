@@ -1,0 +1,31 @@
+{
+  "applications": ["finspin"],
+  "changelogDate": "20231007081242",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "organisation",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "blocked",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Organisation",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "orgAccount",
+      "otherEntityRelationshipName": "org",
+      "relationshipName": "orgAccount",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

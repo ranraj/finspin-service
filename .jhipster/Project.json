@@ -1,0 +1,49 @@
+{
+  "applications": ["finspin"],
+  "changelogDate": "20231007081642",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "project",
+  "fields": [
+    {
+      "fieldName": "string",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Project",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "orgAccount",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "orgAccount",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "sprint",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "sprint",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "orgGroup",
+      "otherEntityRelationshipName": "project",
+      "relationshipName": "orgGroup",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

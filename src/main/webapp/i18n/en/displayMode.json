@@ -1,0 +1,12 @@
+{
+  "finspinApp": {
+    "DisplayMode": {
+      "null": "",
+      "Expand": "Expand",
+      "Less": "Less",
+      "None": "None",
+      "Title": "Title",
+      "Hide": "Hide"
+    }
+  }
+}

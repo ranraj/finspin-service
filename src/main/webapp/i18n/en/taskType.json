@@ -1,0 +1,13 @@
+{
+  "finspinApp": {
+    "TaskType": {
+      "null": "",
+      "Epic": "Epic",
+      "Spike": "Spike",
+      "Task": "Task",
+      "Bug": "Bug",
+      "Clarification": "Clarification",
+      "FeatureRequest": "FeatureRequest"
+    }
+  }
+}

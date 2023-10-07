@@ -1,0 +1,58 @@
+{
+  "applications": ["finspin"],
+  "changelogDate": "20231007081842",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "comment",
+  "fields": [
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disabled",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "upVote",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "downVote",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "permLink",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Comment",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "comment",
+      "ownerSide": true,
+      "relationshipName": "owner",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "task",
+      "otherEntityRelationshipName": "comment",
+      "relationshipName": "task",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,42 @@
+{
+  "finspinApp": {
+    "task": {
+      "home": {
+        "title": "Tasks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Task",
+        "createOrEditLabel": "Create or edit a Task",
+        "search": "Search for Task",
+        "notFound": "No Tasks found"
+      },
+      "created": "A new Task is created with identifier {{ param }}",
+      "updated": "A Task is updated with identifier {{ param }}",
+      "deleted": "A Task is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Task {{ id }}?"
+      },
+      "detail": {
+        "title": "Task"
+      },
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "createDate": "Create Date",
+      "updatedDate": "Updated Date",
+      "status": "Status",
+      "type": "Type",
+      "effortHrs": "Effort Hrs",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "owner": "Owner",
+      "createdBy": "Created By",
+      "sprint": "Sprint",
+      "orgGroup": "Org Group",
+      "assignedTo": "Assigned To",
+      "parent": "Parent",
+      "watcher": "Watcher",
+      "comment": "Comment",
+      "tag": "Tag"
+    }
+  }
+}

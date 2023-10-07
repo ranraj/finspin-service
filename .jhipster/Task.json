@@ -1,0 +1,114 @@
+{
+  "applications": ["finspin"],
+  "changelogDate": "20231007081742",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "task",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "TaskStatus",
+      "fieldValues": "Open,Inprogress,Invalid,Hold,Completed,Reviewed,Tested,Done,Duplicate"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TaskType",
+      "fieldValues": "Epic,Spike,Task,Bug,Clarification,FeatureRequest"
+    },
+    {
+      "fieldName": "effortHrs",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Task entity.\\n@author The JHipster team.",
+  "jpaMetamodelFiltering": false,
+  "name": "Task",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "task",
+      "ownerSide": true,
+      "relationshipName": "owner",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "task",
+      "ownerSide": true,
+      "relationshipName": "createdBy",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "sprint",
+      "otherEntityRelationshipName": "task",
+      "relationshipName": "sprint",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "orgGroup",
+      "otherEntityRelationshipName": "task",
+      "relationshipName": "orgGroup",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "task",
+      "relationshipName": "assignedTo",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "task",
+      "otherEntityRelationshipName": "task",
+      "relationshipName": "parent",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "task",
+      "ownerSide": true,
+      "relationshipName": "watcher",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "task",
+      "relationshipName": "comment",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "tag",
+      "otherEntityRelationshipName": "task",
+      "ownerSide": false,
+      "relationshipName": "tag",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

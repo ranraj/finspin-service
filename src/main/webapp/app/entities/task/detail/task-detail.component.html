@@ -1,0 +1,98 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="task">
+      <h2 data-cy="taskDetailsHeading"><span jhiTranslate="finspinApp.task.detail.title">Task</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ task.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.title">Title</span></dt>
+        <dd>
+          <span>{{ task.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.description">Description</span></dt>
+        <dd>
+          <span>{{ task.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ task.createDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.updatedDate">Updated Date</span></dt>
+        <dd>
+          <span>{{ task.updatedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'finspinApp.TaskStatus.' + task.status }}">{{ task.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.type">Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'finspinApp.TaskType.' + task.type }}">{{ task.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.effortHrs">Effort Hrs</span></dt>
+        <dd>
+          <span>{{ task.effortHrs }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ task.startDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.endDate">End Date</span></dt>
+        <dd>
+          <span>{{ task.endDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.owner">Owner</span></dt>
+        <dd>
+          <span>{{ task.owner?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ task.createdBy?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.sprint">Sprint</span></dt>
+        <dd>
+          <div *ngIf="task.sprint">
+            <a [routerLink]="['/sprint', task.sprint?.id, 'view']">{{ task.sprint?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.orgGroup">Org Group</span></dt>
+        <dd>
+          <div *ngIf="task.orgGroup">
+            <a [routerLink]="['/org-group', task.orgGroup?.id, 'view']">{{ task.orgGroup?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.assignedTo">Assigned To</span></dt>
+        <dd>
+          <span>{{ task.assignedTo?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.parent">Parent</span></dt>
+        <dd>
+          <div *ngIf="task.parent">
+            <a [routerLink]="['/task', task.parent?.id, 'view']">{{ task.parent?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.task.watcher">Watcher</span></dt>
+        <dd>
+          <span *ngFor="let watcher of task.watchers; let last = last"> {{ watcher.id }}{{ last ? '' : ', ' }} </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/task', task.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+{
+  "applications": ["finspin"],
+  "changelogDate": "20231007082142",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "tile",
+  "fields": [
+    {
+      "fieldName": "positionX",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "positionY",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "color",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "positionMode",
+      "fieldType": "PositionMode",
+      "fieldValues": "Fixed,Floating,Moveable,None"
+    },
+    {
+      "fieldName": "height",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "width",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "displaySize",
+      "fieldType": "DisplaySize",
+      "fieldValues": "X1,X2,X3"
+    },
+    {
+      "fieldName": "displayMode",
+      "fieldType": "DisplayMode",
+      "fieldValues": "Expand,Less,None,Title,Hide"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Tile",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "task",
+      "otherEntityRelationshipName": "tile",
+      "ownerSide": true,
+      "relationshipName": "task",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "board",
+      "otherEntityRelationshipName": "board",
+      "relationshipName": "board",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

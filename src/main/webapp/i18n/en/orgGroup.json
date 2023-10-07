@@ -1,0 +1,31 @@
+{
+  "finspinApp": {
+    "orgGroup": {
+      "home": {
+        "title": "Org Groups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Org Group",
+        "createOrEditLabel": "Create or edit a Org Group",
+        "search": "Search for Org Group",
+        "notFound": "No Org Groups found"
+      },
+      "created": "A new Org Group is created with identifier {{ param }}",
+      "updated": "A Org Group is updated with identifier {{ param }}",
+      "deleted": "A Org Group is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Org Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Org Group"
+      },
+      "id": "ID",
+      "countryName": "Country Name",
+      "createdDate": "Created Date",
+      "updateDate": "Update Date",
+      "head": "Head",
+      "project": "Project",
+      "member": "Member",
+      "task": "Task"
+    }
+  }
+}

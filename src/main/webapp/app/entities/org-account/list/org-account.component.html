@@ -1,0 +1,114 @@
+<div>
+  <h2 id="page-heading" data-cy="OrgAccountHeading">
+    <span jhiTranslate="finspinApp.orgAccount.home.title">Org Accounts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="finspinApp.orgAccount.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-org-account"
+        [routerLink]="['/org-account/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="finspinApp.orgAccount.home.createLabel"> Create a new Org Account </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="finspinApp.orgAccount.home.search">Query</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'finspinApp.orgAccount.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+          <fa-icon icon="trash-alt"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="orgAccounts?.length === 0">
+    <span jhiTranslate="finspinApp.orgAccount.home.notFound">No orgAccounts found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="orgAccounts && orgAccounts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="finspinApp.orgAccount.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="finspinApp.orgAccount.blocked">Blocked</span></th>
+          <th scope="col"><span jhiTranslate="finspinApp.orgAccount.owner">Owner</span></th>
+          <th scope="col"><span jhiTranslate="finspinApp.orgAccount.org">Org</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let orgAccount of orgAccounts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/org-account', orgAccount.id, 'view']">{{ orgAccount.id }}</a>
+          </td>
+          <td>{{ orgAccount.name }}</td>
+          <td>{{ orgAccount.blocked }}</td>
+          <td>
+            {{ orgAccount.owner?.id }}
+          </td>
+          <td>
+            <div *ngIf="orgAccount.org">
+              <a [routerLink]="['/organisation', orgAccount.org?.id, 'view']">{{ orgAccount.org?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/org-account', orgAccount.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/org-account', orgAccount.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(orgAccount)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

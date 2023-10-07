@@ -1,0 +1,197 @@
+
+
+application {
+  config {
+    baseName finspin,
+    applicationType monolith,
+    reactive true,
+    searchEngine elasticsearch,
+    packageName com.yali.finspin,
+    authenticationType jwt,
+    databaseType mongodb,
+    prodDatabaseType mongodb,
+    clientFramework angular,
+    enableTranslation true,
+    nativeLanguage en,
+    languages [en]    
+  }
+  entities *
+}
+
+entity Organisation {
+	name String
+    blocked Boolean
+}
+
+entity OrgAccount {
+	name String
+    blocked Boolean
+}
+enum OrgAccountStatus{
+	Trial, Active, Free
+}
+
+entity OrgGroup {
+	countryName String
+    createdDate Instant
+    updateDate Instant
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Sprint {
+	name String
+	code String	
+    createdDate Instant
+    updateDate Instant
+    startDate Instant
+    endDate Instant
+}
+
+entity Project {
+	string String required
+    createdDate Instant
+    updateDate Instant
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity Task {
+	title String
+	description String
+    createDate Instant
+	updatedDate Instant
+    status TaskStatus
+    type TaskType
+    effortHrs Long
+    startDate Instant
+    endDate Instant
+}
+
+/**
+ * The Employee entity.
+ */
+entity User {
+	/**
+	* The firstname attribute.
+	*/
+	firstName String
+	lastName String
+	email String
+	phoneNumber String
+	hireDate Instant	
+}
+
+enum Permission{
+	GroupWrite, GroupCreate,UserCreate,UserDelete,UserEdit,CommentCreate,CommentEdit, CommentDelete,BoardCreate,BoardUpdate,BoardDelete,BoardShare,RoleCreate,RoleEdit,TaskCreate,TaskView,TaskEdit,TaskDelete, TaskMoveStatus,
+    SpringCreate,SprintUpdate,SprintDelete, DashboardCreate,DashboardUpdate, ProjectCreate,ProjecUpdate,ProjectDelete, ReportCreate,ReportUpdate, ReportDelete, ReportShare
+}
+entity Comment {
+	createdDate Instant
+	updatedDate Instant
+	content String
+    disabled Boolean
+    upVote Long
+    downVote Long
+    permLink String
+}
+entity Dashboard{
+	name String
+    createdDate Instant
+    updateDate Instant
+}
+entity Board{
+	title String
+    uid String
+    createdDate Instant
+    updateDate Instant
+}
+entity Tile{
+	positionX Long
+    positionY Long    
+    color String  
+    positionMode PositionMode 
+    height Long
+    width Long
+    displaySize DisplaySize    
+    displayMode DisplayMode
+}
+entity Tag{
+	name String	
+}
+
+enum DisplaySize{
+    X1, X2, X3
+}
+enum DisplayMode{
+	Expand, Less, None, Title, Hide
+}
+enum PositionMode{
+	Fixed, Floating, Moveable, None
+}
+enum TaskStatus {
+    Open, Inprogress, Invalid, Hold, Completed, Reviewed, Tested , Done, Duplicate
+}
+enum TaskType {
+    Epic, Spike, Task, Bug, Clarification, FeatureRequest
+}
+
+relationship ManyToOne {
+	Sprint{project} to Project{sprint(name)}
+    Task{sprint} to Sprint{task(title)}
+    Comment{task} to Task{comment}    
+    OrgGroup{project} to Project{orgGroup}    
+    OrgAccount{org} to Organisation{orgAccount}    
+	Project{orgAccount} to OrgAccount{project}
+    Task{orgGroup} to OrgGroup{task}
+    Board{dashBoard} to Dashboard{board}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {	
+    Board{board} to Tile{board}                    
+}
+relationship ManyToMany {	
+    OrgGroup{member} to User{orgGroup}
+    Task{watcher} to User{task}
+    Tag{task} to Task{tag}
+}
+
+relationship ManyToOne {
+    Task{assignedTo} to User	
+	Task{parent} to Task        
+}
+
+// defining multiple oneToOne relationships
+relationship OneToOne {	
+    OrgAccount{owner} to User
+    OrgGroup{head} to User
+    Tile{task} to Task
+    Comment{owner} to User
+    Task{owner} to User
+    Task{createdBy} to User    
+}
+
+
+// Set pagination options
+paginate Task with pagination
+paginate Comment with pagination
+paginate Board with pagination
+paginate Tile with pagination
+paginate Dashboard with pagination
+paginate OrgGroup with pagination
+paginate Sprint with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Comment
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
+
+//Search Engine
+//elasticsearch Board, Task, Dashboard, Comment, Sprint

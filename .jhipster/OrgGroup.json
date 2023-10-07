@@ -1,0 +1,55 @@
+{
+  "applications": ["finspin"],
+  "changelogDate": "20231007081442",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "org_group",
+  "fields": [
+    {
+      "fieldName": "countryName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updateDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "OrgGroup",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "orgGroup",
+      "ownerSide": true,
+      "relationshipName": "head",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "project",
+      "otherEntityRelationshipName": "orgGroup",
+      "relationshipName": "project",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "orgGroup",
+      "ownerSide": true,
+      "relationshipName": "member",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "task",
+      "otherEntityRelationshipName": "orgGroup",
+      "relationshipName": "task",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

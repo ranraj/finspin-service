@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="board">
+      <h2 data-cy="boardDetailsHeading"><span jhiTranslate="finspinApp.board.detail.title">Board</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ board.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.board.title">Title</span></dt>
+        <dd>
+          <span>{{ board.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.board.uid">Uid</span></dt>
+        <dd>
+          <span>{{ board.uid }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.board.createdDate">Created Date</span></dt>
+        <dd>
+          <span>{{ board.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.board.updateDate">Update Date</span></dt>
+        <dd>
+          <span>{{ board.updateDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="finspinApp.board.dashBoard">Dash Board</span></dt>
+        <dd>
+          <div *ngIf="board.dashBoard">
+            <a [routerLink]="['/dashboard', board.dashBoard?.id, 'view']">{{ board.dashBoard?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/board', board.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
