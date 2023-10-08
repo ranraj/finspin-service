@@ -72,6 +72,12 @@ public class TileServiceImpl implements TileService {
         log.debug("Request to get all Tiles");
         return tileRepository.findAllBy(pageable).map(tileMapper::toDto);
     }
+    
+    @Override
+    public Flux<TileDTO> findAllByBoardId(String boardId,Pageable pageable) {
+        log.debug("Request to get all Tiles");
+        return tileRepository.findAllByBoardId(boardId,pageable).map(tileMapper::toDto);
+    }
 
     public Mono<Long> countAll() {
         return tileRepository.count();

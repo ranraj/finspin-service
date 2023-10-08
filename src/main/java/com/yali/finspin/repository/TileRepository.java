@@ -1,9 +1,12 @@
 package com.yali.finspin.repository;
 
-import com.yali.finspin.domain.Tile;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
+
+import com.yali.finspin.domain.Tile;
+
 import reactor.core.publisher.Flux;
 
 /**
@@ -13,4 +16,7 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface TileRepository extends ReactiveMongoRepository<Tile, String> {
     Flux<Tile> findAllBy(Pageable pageable);
+    
+    @Query("{'boardId' : ?0}")
+    Flux<Tile> findAllByBoardId(String boardId,Pageable pageable);
 }

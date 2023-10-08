@@ -79,4 +79,12 @@ public interface TileService {
      * @return the list of entities.
      */
     Flux<TileDTO> search(String query, Pageable pageable);
+    
+    /**
+     * Get all the tiles by Board Id.
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    Flux<TileDTO> findAllByBoardId(String id, Pageable pageable);
 }

@@ -6,6 +6,7 @@ import com.yali.finspin.domain.Board;
 import com.yali.finspin.repository.BoardRepository;
 import com.yali.finspin.repository.search.BoardSearchRepository;
 import com.yali.finspin.service.BoardService;
+import com.yali.finspin.service.TileService;
 import com.yali.finspin.service.dto.BoardDTO;
 import com.yali.finspin.service.mapper.BoardMapper;
 import org.slf4j.Logger;
@@ -27,12 +28,12 @@ public class BoardServiceImpl implements BoardService {
 
     private final BoardMapper boardMapper;
 
-    private final BoardSearchRepository boardSearchRepository;
-
-    public BoardServiceImpl(BoardRepository boardRepository, BoardMapper boardMapper, BoardSearchRepository boardSearchRepository) {
+    private final BoardSearchRepository boardSearchRepository;    
+    
+    public BoardServiceImpl(BoardRepository boardRepository, BoardMapper boardMapper, BoardSearchRepository boardSearchRepository, TileService tileService) {
         this.boardRepository = boardRepository;
         this.boardMapper = boardMapper;
-        this.boardSearchRepository = boardSearchRepository;
+        this.boardSearchRepository = boardSearchRepository;        
     }
 
     @Override
@@ -70,7 +71,8 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Flux<BoardDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Boards");
-        return boardRepository.findAllBy(pageable).map(boardMapper::toDto);
+        Flux<BoardDTO> result = boardRepository.findAllBy(pageable).map(boardMapper::toDto);        
+        return result;
     }
 
     public Mono<Long> countAll() {

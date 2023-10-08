@@ -176,9 +176,26 @@ public class TileResource {
     @GetMapping("/tiles")
     public Mono<ResponseEntity<List<TileDTO>>> getAllTiles(
         @org.springdoc.api.annotations.ParameterObject Pageable pageable,
-        ServerHttpRequest request
+        ServerHttpRequest request,
+        @RequestParam(value = "board_id",required = false) String boardId
     ) {
         log.debug("REST request to get a page of Tiles");
+        if(boardId != null) {
+        	return tileService
+                    .countAll()
+                    .zipWith(tileService.findAllByBoardId(boardId,pageable).collectList())
+                    .map(countWithEntities ->
+                        ResponseEntity
+                            .ok()
+                            .headers(
+                                PaginationUtil.generatePaginationHttpHeaders(
+                                    UriComponentsBuilder.fromHttpRequest(request),
+                                    new PageImpl<>(countWithEntities.getT2(), pageable, countWithEntities.getT1())
+                                )
+                            )
+                            .body(countWithEntities.getT2())
+                    );
+        }
         return tileService
             .countAll()
             .zipWith(tileService.findAll(pageable).collectList())
